@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/widgets/feed.dart';
+import 'package:instagram/page/camera_page.dart';
+import 'package:instagram/page/favorite_page.dart';
+import 'package:instagram/page/home_page.dart';
+import 'package:instagram/page/my_page.dart';
+import 'package:instagram/page/search_page.dart';
 
 // dart에서는 main() 함수를 호출하도록 약속되어 있습니다.
 void main() {
@@ -22,52 +26,53 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  // 현재 활성화된 탭의 index를 기록해두는 변수
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     // Scaffold는 기본적인 레이아웃의 기본을 잡아줍니다.
     return Scaffold(
-      // appBar : 상단의 띠
-      // appBar는 Scaffold 밑에 넣어주시면 됩니다.
-      appBar: AppBar(
-        // assets/images 밑에 저장한 인스타그램 로고를 불러옵니다
-        title: Image.asset(
-          'assets/images/logo.png',
-          height: 32,
-        ),
-        // 배경 색상을 흰색으로
-        backgroundColor: Colors.white,
-        // AppBar의 왼쪽(leading)에 카메라 아이콘 버튼을 만들어요
-        leading: IconButton(
-          icon: Icon(
-            CupertinoIcons.camera,
-            color: Colors.black,
-          ),
-          onPressed: () {}, // 클릭 이벤트를 받는 함수인데, 일단 비워둡시다.
-        ),
-        // AppBar의 오른쪽에는 여러개의 버튼이 올 수 있어서 actions라는 배열로 표시해요
-        actions: [
-          // 종이비행기 아이콘 버튼
-          IconButton(
-            icon: Icon(
-              CupertinoIcons.paperplane,
-              color: Colors.black,
-            ),
-            onPressed: () {},
-          ),
+      // body : appBar 하단 부분
+      body: IndexedStack(
+        // selectedIndex에 해당하는 위젯이 최상위에 노출됩니다.
+        index: selectedIndex,
+        // children의 순서가 중요합니다.
+        children: [
+          HomePage(),
+          SearchPage(),
+          // 순서를 유지하기 위해 CameraPage 대신 빈 컨테이너를 넣어줍니다.
+          Container(),
+          FavoritePage(),
+          MyPage(),
         ],
       ),
-      // body : appBar 하단 부분
-      body: ListView.builder(
-        // builder의 경우 동적으로 아이템을 생성합니다.
-        itemCount: 5, // 전체 아이템의 개수
-        itemBuilder: (context, index) {
-          return Feed(); // 각 index 별 Feed
-        },
-      ),
       bottomNavigationBar: BottomNavigationBar(
+        // 현재 활성화된 탭 index
+        currentIndex: selectedIndex,
+        // 탭 선택시 호출되는 함수로 선택된 탭의 index가 넘어옵니다.
+        onTap: (index) {
+          // camera index
+          final cameraPageIndex = 2;
+          if (index == cameraPageIndex) {
+            // CameraPage 띄우기
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CameraPage()),
+            );
+          } else {
+            // selectedIndex를 유저가 선택한 index로 업데이트하고, setState로 화면 갱신을 요청합니다.
+            return setState(() => selectedIndex = index);
+          }
+        },
         showSelectedLabels: false, // 선택된 버튼의 label 안보이게
         showUnselectedLabels: false, // 선택되지 않은 버튼의 label 안보이게
         selectedItemColor: Colors.black, // 선택된 아이콘 색상

@@ -32,12 +32,13 @@ class MyPage extends StatelessWidget {
               children: [
                 Row(
                   children: [
-										// CircleAvatar는 원형 이미지를 만들기 좋습니다.
+                    // CircleAvatar는 원형 이미지를 만들기 좋습니다.
                     CircleAvatar(
                       radius: 38,
-                      backgroundImage: Image.asset('assets/images/cat.jpg').image,
+                      backgroundImage:
+                          Image.asset('assets/images/cat.jpg').image,
                     ),
-										// ContentCount는 직접 만든 위젯입니다!
+                    // ContentCount는 직접 만든 위젯입니다!
                     Expanded(child: Statistic(count: '669', title: '게시물')),
                     Expanded(child: Statistic(count: '1,613만', title: '팔로워')),
                     Expanded(child: Statistic(count: '0', title: '팔로잉')),
@@ -49,12 +50,12 @@ class MyPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8),
-					// Expanded는 child가 남은 공간을 최대한 확장하여 차지하도록 해줍니다.
+          // Expanded는 child가 남은 공간을 최대한 확장하여 차지하도록 해줍니다.
           Expanded(
-						// GridView는 타일 형태의 레이아웃을 쉽게 구성하도록 도와줍니다.
+            // GridView는 타일 형태의 레이아웃을 쉽게 구성하도록 도와줍니다.
             child: GridView.count(
               crossAxisCount: 3, // 세로 라인 수
-							// List.generate 문법이 궁금하면 dart List.generate라고 검색해보세요!
+              // List.generate 문법이 궁금하면 dart List.generate라고 검색해보세요!
               children: List.generate(100, (index) {
                 return Container(
                   // 이미지에 검정색 테두리를 넣었어요.
@@ -65,7 +66,7 @@ class MyPage extends StatelessWidget {
                     ),
                   ),
                   child: Image.network(
-										// index가 dummyUrls 보다 넘치지 않도록 dummyUrls.length로 나눈 나머지값을 index로 합니다.
+                    // index가 dummyUrls 보다 넘치지 않도록 dummyUrls.length로 나눈 나머지값을 index로 합니다.
                     dummyUrls[index % dummyUrls.length],
                     fit: BoxFit.cover,
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram/api/unsplash_api.dart';
 import 'package:instagram/page/camera_page.dart';
 import 'package:instagram/widgets/feed.dart';
 
@@ -34,7 +35,12 @@ class HomePage extends StatelessWidget {
               CupertinoIcons.paperplane,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () async {
+              final feedModels = await UnsplashAPI.getFeedModels();
+              if (feedModels != null) {
+                print(feedModels[0].likes);
+              }
+            },
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:instagram/page/camera_page.dart';
 import 'package:instagram/page/favorite_page.dart';
 import 'package:instagram/page/home_page.dart';
@@ -7,7 +8,10 @@ import 'package:instagram/page/my_page.dart';
 import 'package:instagram/page/search_page.dart';
 
 // dart에서는 main() 함수를 호출하도록 약속되어 있습니다.
-void main() {
+Future main() async {
+  // .env를 load 합니다.
+  await DotEnv.load(fileName: ".env");
+
   // runApp() 함수는 전달받은 Widget을 루트로 만듭니다.
   runApp(MyApp());
 }

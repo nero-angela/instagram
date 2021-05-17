@@ -38,7 +38,7 @@ class Feed extends StatelessWidget {
           ],
         ),
         Padding(
-					padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -60,7 +60,8 @@ class Feed extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: ' Valentines Day would be extra sweet this year if everyone gave out ice cream bouquets!',
+                      text:
+                          ' Valentines Day would be extra sweet this year if everyone gave out ice cream bouquets!',
                     ),
                   ],
                 ),
